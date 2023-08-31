@@ -266,6 +266,31 @@ echo -e $YELLOW"Turn back the VPN connection!"
 pause 'Press [ENTER] key to continue...'
 clear
 echo ""
+echo -e $PURPLE"######################################################################################"
+echo "www webiste working"
+echo -e "######################################################################################"$NC
+echo ""
+
+echo -e $CYAN"MANUAL CHECKING! MANUAL CHECKING! MANUAL CHECKING!"$NC
+echo ""
+echo ""
+echo -e $YELLOW"Firefox: https://www.firmatpolsa.pl"$NC
+echo -e $YELLOW"Website must appear"$NC
+echo ""
+pause 'Press [ENTER] for a next stage...'
+echo ""
+echo -e $YELLOW"Disable RA VPN"$NC
+echo -e $YELLOW"Reload a webpage: Website must appear, certificate issued by Company's CA"$NC
+echo -e $YELLOW"Display message: Linux - Because there is more than one way. This site was served by"$NC
+echo ""
+pause 'Press [ENTER] key to continue...'
+echo -e $GREEN"IF both works, ITEM iS OK"$NC
+echo -e $RED"BUT IF NOT, ITEM IS FAILED"$NC
+echo -e $YELLOW"START the RA service!"$NC
+echo ""
+pause 'Press [ENTER] key to continue...'
+clear
+echo ""
 ################## Ending section ##################
 echo ""
 echo ""
