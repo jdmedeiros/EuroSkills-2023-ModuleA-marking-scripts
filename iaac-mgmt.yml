@@ -1,0 +1,23 @@
+- name: Hostname check
+  hosts: all
+  become: true
+  tasks:
+  - name: Check hostname
+    shell: cat /etc/hostname
+    register: hostname_output
+  - name: Fail if hostname is wrong
+    fail:
+      msg: "Hostname for {{ hostname }} is incorrect. Expected: {{ hostname }} Got: {{ hostname_output.stdout }}"
+    when: hostname_output.stdout != hostname
+
+- name: Timezone check
+  hosts: all
+  become: true
+  tasks:
+  - name: Check timezone
+    shell: "timedatectl show | grep Timezone"
+    register: timezone_output
+  - name: Fail if timezone is wrong
+    fail:
+      msg: "Timezone for {{ hostname }} is incorrect. Expected: Timezone=Europe/Warsaw Got: {{ timezone_output.stdout }}"
+    when: timezone_output.stdout != "Timezone=Europe/Warsaw"

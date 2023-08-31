@@ -114,3 +114,20 @@ echo ""
 pause 'Press [ENTER] key to continue...'
 clear
 echo ""
+echo -e $PURPLE"######################################################################################"
+echo "1-hostname.yml setup hostname and timezone"
+echo -e "######################################################################################"$NC
+echo ""
+echo -e $YELLOW"Pleae wait, test in progress..."$NC
+      ansible-playbook iaac-mgmt.yml > ansible_output.txt
+      if [ $? -gt 0 ]; then
+        echo -e $RED"FAILED - 1-hostname.yml setup hostname and timezone"$NC
+        cat ansible_output.txt | grep fatal
+      else
+        echo -e $GREEN"OK - 1-hostname.yml setup hostname and timezone"$NC
+      fi
+      rm ansible_output.txt
+echo ""
+pause 'Press [ENTER] key to continue...'
+clear
+echo ""
