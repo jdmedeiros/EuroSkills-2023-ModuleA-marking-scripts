@@ -114,13 +114,6 @@ echo ""
 				echo "-----------------------------------------------------------------"
 				echo -e $YELLOW"Time zone: Europe/Warsaw"$NC
 	fi
-    
-	if [  $( ssh root@localhost echo 1 | grep -c 1 ) = 1 ]
-	then  
-		echo -e $GREEN"OK - SSH access"$NC
-	else
-		echo -e $RED"FAILED - SSH access"$NC
-	fi
 
 echo -e $YELLOW"If every item before is GREEN, point for first aspect."$NC
 echo ""

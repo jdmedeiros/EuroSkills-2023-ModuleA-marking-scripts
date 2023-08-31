@@ -75,7 +75,7 @@ echo ""
 				echo -e $YELLOW"Correct hostname is: fw-sddc"$NC
 	fi
 
-	if [  $( checkIP  | grep -ic "10.20.23.254/24") = 1 ] && [  $( checkIP  | grep -ic "193.224.23.2/24") = 1 ]
+	if [  $( checkIP  | grep -ic "10.20.23.254/25") = 1 ] && [  $( checkIP  | grep -ic "193.224.23.2/24") = 1 ]
 	then  
 		 echo -e $GREEN"OK - Check ip address"$NC
 	else
@@ -83,7 +83,7 @@ echo ""
 			echo "-----------------------------------------------------------------"
 			checkIP
 				echo "-----------------------------------------------------------------"
-				echo -e $YELLOW"Must contain 10.20.23.254/24, 193.224.23.2/24"$NC
+				echo -e $YELLOW"Must contain 10.20.23.254/25, 193.224.23.2/24"$NC
 	fi	
 
 	if [  $( checkKeyBoard | grep -ic "us" ) = 1 ]
@@ -114,13 +114,6 @@ echo ""
 				echo "-----------------------------------------------------------------"
 				echo -e $YELLOW"Time zone: Europe/Warsaw"$NC
 	fi
-    
-	if [  $( ssh root@localhost echo 1 | grep -c 1 ) = 1 ]
-	then  
-		echo -e $GREEN"OK - SSH access"$NC
-	else
-		echo -e $RED"FAILED - SSH access"$NC
-	fi
 
 echo -e $YELLOW"If every item before is GREEN, point for first aspect."$NC
 echo ""
@@ -143,7 +136,7 @@ echo ""
 echo -e $YELLOW"See the next output:"$NC
     cat /etc/nftables.conf
 echo -e $YELLOW"Is INPUT and FORWARD policy DROP? Have some rules without everything allow from/to everywhere?"$NC
-echo -e $YELLOW"Have PAT? Only needed service port forwarded to inside?"$NC
+echo -e $YELLOW"Have PAT and port-forwarding? Only needed service port forwarded to inside?"$NC
 echo ""
 echo -e $CYAN"IT IS A TIME FOR JUDGEMENT!"$NC
 echo ""

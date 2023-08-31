@@ -114,13 +114,6 @@ echo ""
 				echo "-----------------------------------------------------------------"
 				echo -e $YELLOW"Time zone: Europe/Warsaw"$NC
 	fi
-    
-	if [  $( ssh root@localhost echo 1 | grep -c 1 ) = 1 ]
-	then  
-		echo -e $GREEN"OK - SSH access"$NC
-	else
-		echo -e $RED"FAILED - SSH access"$NC
-	fi
 
 echo -e $YELLOW"If every item before is GREEN, point for first aspect."$NC
 echo ""
@@ -148,7 +141,7 @@ echo ""
 pause 'Press [ENTER] key to continue...'
 echo -e $YELLOW"See the next output:"$NC
     iptables -L -n -t nat
-echo -e $YELLOW"Have PAT? Only needed service port forwarded to inside?"$NC
+echo -e $YELLOW"Have PAT and port-forwarding? Only needed service port forwarded to inside?"$NC
 echo ""
 echo -e $CYAN"IT IS A TIME FOR JUDGEMENT!"$NC
 echo ""
