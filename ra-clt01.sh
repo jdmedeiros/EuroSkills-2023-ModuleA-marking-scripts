@@ -61,9 +61,9 @@ echo -e $YELLOW"Have a tunnel or tap interface and it is up or ens interface has
 echo ""
 pause 'Press [ENTER] key to continue...'
 echo -e $YELLOW"Run some traceroute:"$NC
-traceroute -T -m 10 192.168.10.1
-traceroute -T -m 10 192.168.20.1
-traceroute -T -m 10 10.20.23.129
+traceroute -T -m 10 -n 192.168.10.1
+traceroute -T -m 10 -n 192.168.20.1
+traceroute -T -m 10 -n 10.20.23.129
 echo -e $YELLOW"Are you seen 2 hop in the 1-2 line and 3 hop in the 3 line?"$NC
 pause 'Press [ENTER] key to continue...'
 echo -e $GREEN"IF say YES for all question, the ITEM iS OK"$NC
