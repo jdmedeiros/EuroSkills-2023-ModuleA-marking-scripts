@@ -1,0 +1,15 @@
+- name: Firewall check
+  hosts: all
+  become: true
+  tasks:
+  - name: Create folder on destination node
+    file:
+      path: /ansible/fw-configs
+      state: directory
+    delegate_to: localhost
+  - name: Copy config to localhost
+    fetch:
+      src: /etc/nftables.conf
+      dest: /ansible/fw-configs/{{ hostname }}
+      flat: true
+    

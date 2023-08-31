@@ -131,3 +131,70 @@ echo ""
 pause 'Press [ENTER] key to continue...'
 clear
 echo ""
+echo -e $PURPLE"######################################################################################"
+echo "2-firewall.yml setup correct fw settings"
+echo -e "######################################################################################"$NC
+echo ""
+echo -e $YELLOW"Pleae wait, I collect the firewall configurations..."$NC
+rm /ansible/fw-configs/* 2> /dev/null
+ansible-playbook firewall_check.yml > /dev/null
+echo ""
+echo -e $YELLOW"I am done. I found $(ls /ansible/fw-configs/ | grep wc -l) pcs firewall configs. Ready to shows the firewall configs."$NC
+pause 'Press [ENTER] key to continue...'
+clear
+for fwconf in `ls /ansible/fw-configs/`; do
+  echo -e "${BLUE}&&&&&&&&&&&&&&&&&&"
+  echo -e "${YELLOW}$fwconf${NC}\n"
+  cat "/ansible/fw-configs/$fwconf"
+  echo -e "${BLUE}&&&&&&&&&&&&&&&&&&${NC}\n"
+  echo -e $YELLOW"INPUT policy DROP, SSH only from 10.20.23.0/24 (or 25), bck only 80 and/or 443, frt only 443, (80), port 990 (and some FTP port) and ICMP allowed?"$NC
+  pause 'Press [ENTER] key to continue...'
+done
+  echo -e $GREEN"If all frt and bck server's firewall configured correctly - ITEM is OK"$NC
+  echo -e $RED"But if NOT - FAILED"$NC
+echo ""
+pause 'Press [ENTER] key to continue...'
+clear
+echo ""
+echo -e $PURPLE"######################################################################################"
+echo "Ansible code style"
+echo -e "######################################################################################"$NC
+echo ""
+echo -e $CYAN"JUDGEMENT! JUDGEMENT! JUDGEMENT! JUDGEMENT! JUDGEMENT!"$NC
+echo ""
+pause 'Press [ENTER] key to continue...'
+echo ""
+if [  $( cat /ansible/*.yml | grep -c "handlers:" ) > 0 ]
+	then  
+		echo -e $GREEN"Found handlers"$NC
+	else
+		echo -e $RED"NOT found any handlers"$NC
+	fi
+echo ""
+if [  $( cat /ansible/*.yml | grep -c "#" ) > 0 ]
+	then  
+		echo -e $GREEN"Found comments"$NC
+	else
+		echo -e $RED"NOT found any comments"$NC
+	fi
+echo ""
+if [  $( cat /ansible/*.yml | grep -c "template:" ) > 0 ]
+	then  
+		echo -e $GREEN"Found template using"$NC
+	else
+		echo -e $RED"NOT found any template"$NC
+	fi
+echo ""
+echo -e $CYAN"IT IS A TIME FOR JUDGEMENT!"$NC
+echo ""
+pause 'Press [ENTER] key to continue...'
+clear
+echo ""
+################## Ending section ##################
+echo ""
+echo ""
+echo -e $BLUE"######################################################################################"
+echo "The marking of this VM is finished. The script is terminating."
+echo -e "######################################################################################"$NC
+echo ""
+echo ""
