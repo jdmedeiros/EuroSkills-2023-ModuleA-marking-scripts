@@ -61,9 +61,9 @@ echo -e $YELLOW"Have a tunnel or tap interface and it is up or ens interface has
 echo ""
 pause 'Press [ENTER] key to continue...'
 echo -e $YELLOW"Run some traceroute:"$NC
-traceroute -I 192.168.10.1
-traceroute -I 192.168.20.1
-traceroute -I 10.20.23.129
+traceroute -T -m 10 192.168.10.1
+traceroute -T -m 10 192.168.20.1
+traceroute -T -m 10 10.20.23.129
 echo -e $YELLOW"Are you seen 2 hop in the 1-2 line and 3 hop in the 3 line?"$NC
 pause 'Press [ENTER] key to continue...'
 echo -e $GREEN"IF say YES for all question, the ITEM iS OK"$NC
@@ -80,7 +80,7 @@ echo -e $CYAN"JUDGEMENT! JUDGEMENT! JUDGEMENT! JUDGEMENT! JUDGEMENT!"$NC
 echo ""
 pause 'Press [ENTER] key to continue...'
 echo ""
-echo -e $YELLOW"Check the VNP configuration: Autheticate with certificate? Who issued the certificate? (Try ipsec status command or /etc/openvpn.cnf file)"$NC
+echo -e $YELLOW"Check the VPN configuration: Autheticate with certificate? Who issued the certificate? (Try on new tty line ipsec status command or /etc/openvpn/openvpn.cnf file)"$NC
 pause 'Press [ENTER] key to continue...'
 echo -e $CYAN"IT IS A TIME FOR JUDGEMENT!"$NC
 echo ""
@@ -135,7 +135,7 @@ echo -e "#######################################################################
 echo ""
 
 	counter=0
-    if [  $( nslookup fw-hq.firmatpolska.pl | grep -c "192.168" ) = 1 ]
+    if [  $( nslookup fw-hq.firmatpolska.pl | grep -c "192.168.*.254" ) > 0 ]
     then
         counter=$((counter+1))
     else
@@ -146,7 +146,7 @@ echo ""
 		echo -e $YELLOW"Correct output:"
 		echo -e "Private IP address."$NC
     fi
-    if [  $( nslookup dmz-host.firmatpolska.pl | grep -c "192.168" ) = 1 ]
+    if [  $( nslookup dmz-host.firmatpolska.pl | grep -c "Address: 192.168.20.1" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -157,7 +157,7 @@ echo ""
 		echo -e $YELLOW"Correct output:"
 		echo -e "Private IP address.."$NC
     fi
-    if [  $( nslookup fw-sddc.firmatpolska.pl | grep -c "10.20" ) = 1 ]
+    if [  $( nslookup fw-sddc.firmatpolska.pl | grep -c "10.20.23.254" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -168,7 +168,7 @@ echo ""
 		echo -e $YELLOW"Correct output:"
 		echo -e "Private IP address."$NC
     fi
-    if [  $( nslookup www.firmatpolska.pl | grep -c "10.20" ) = 1 ]
+    if [  $( nslookup www.firmatpolska.pl | grep -c "10.20.23." ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -180,12 +180,13 @@ echo ""
 		echo -e "Private IP address."$NC
     fi
 
+echo ""
 echo -e $YELLOW"Shut down the VPN connection and press ENTER!"$NC
 echo ""
 pause 'Press [ENTER] key to continue...'
 
 
-    if [  $( nslookup fw-hq.firmatpolska.pl | grep -c "193.224.23.1" ) = 1 ]
+    if [  $( nslookup fw-hq.firmatpolska.pl | grep -c "Address: 193.224.23.1" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -196,7 +197,7 @@ pause 'Press [ENTER] key to continue...'
 		echo -e $YELLOW"Correct output:"
 		echo -e "Public IP address."$NC
     fi
-    if [  $( nslookup dmz-host.firmatpolska.pl | grep -c "193.224.23.1" ) = 1 ]
+    if [  $( nslookup dmz-host.firmatpolska.pl | grep -c "Address: 193.224.23.1" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -207,7 +208,7 @@ pause 'Press [ENTER] key to continue...'
 		echo -e $YELLOW"Correct output:"
 		echo -e "Public IP address."$NC
     fi
-    if [  $( nslookup fw-sddc.firmatpolska.pl | grep -c "193.224.23.2" ) = 1 ]
+    if [  $( nslookup fw-sddc.firmatpolska.pl | grep -c "Address: 193.224.23.2" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -229,7 +230,7 @@ pause 'Press [ENTER] key to continue...'
 		echo -e $YELLOW"Correct output:"
 		echo -e "Public IP address."$NC
     fi
-    if [  $( nslookup www.firmatpolska.pl | grep -c "193.224.23.2" ) = 1 ]
+    if [  $( nslookup www.firmatpolska.pl | grep -c "Address: 193.224.23.2" ) = 1 ]
     then
         counter=$((counter+1))
     else
@@ -257,10 +258,11 @@ pause 'Press [ENTER] key to continue...'
 		 echo -e $GREEN"OK - DNS public records"$NC
 	else
 		 echo -e $RED"FAILED - DNS public records"$NC
-				echo -e $YELLOW"Correct output:"
-				echo -e "Some records not looks good."$NC
+		echo -e "Some records not looks good."$NC
 	fi
 echo ""
+
+echo -e $YELLOW"Turn back the VPN connection!"
 pause 'Press [ENTER] key to continue...'
 clear
 echo ""
